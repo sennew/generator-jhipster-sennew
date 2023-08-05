@@ -1,0 +1,58 @@
+import { Component, OnInit<% if (!authenticationTypeOauth2) { %>, OnDestroy<% } %> } from '@angular/core';
+<%_ if (!authenticationTypeOauth2) { _%>
+    import { Router } from '@angular/router';
+    import { Subject } from 'rxjs';
+    import { takeUntil } from 'rxjs/operators';
+<%_ } _%>
+
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
+import { PopStateEvent } from '@angular/common';
+
+@Component({
+  selector: '<%= jhiPrefixDashed %>-beheer',
+  templateUrl: './beheer.component.html',
+  styleUrls: ['./beheer.component.scss'],
+})
+export class BeheerComponent implements OnInit<% if (!authenticationTypeOauth2) { %>, OnDestroy<% } %> {
+    account: Account | null = null;
+
+    <%_ if (!authenticationTypeOauth2) { _%>
+
+        private readonly destroy$ = new Subject<void>();
+      <%_ } _%>
+  
+    constructor(private accountService: AccountService, 
+    <%_ if (!authenticationTypeOauth2) { _%>
+        private router: Router
+    <%_ } else { _%>
+        private loginService: LoginService
+    <%_ } _%>
+    ) {}
+
+    ngOnInit(): void {
+        <%_ if (authenticationTypeOauth2) { _%>
+            this.accountService.identity().subscribe(account => (this.account = account));
+        <%_ } else { _%>
+            this.accountService
+              .getAuthenticationState()
+              .pipe(takeUntil(this.destroy$))
+              .subscribe(account => (this.account = account));
+        <%_ } _%>
+    }
+    
+    login(): void {
+        <%_ if (!authenticationTypeOauth2) { _%>
+            this.router.navigate(['/login']);
+        <%_ } else { _%>
+            this.loginService.login();
+        <%_ } _%>
+    }
+    
+    <%_ if (!authenticationTypeOauth2) { _%>
+        ngOnDestroy(): void {
+          this.destroy$.next();
+          this.destroy$.complete();
+        }
+    <%_ } _%>
+}

@@ -1,0 +1,11 @@
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { WEBSITE_ROUTE } from './website.route';
+import { WebsiteComponent } from './website.component';
+
+@NgModule({
+    imports: [RouterModule.forChild(WEBSITE_ROUTE)],
+    declarations: [WebsiteComponent]
+})
+export class WebsiteModule {}

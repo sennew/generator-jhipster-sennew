@@ -3084,7 +3084,7 @@ templates: ${JSON.stringify(existingTemplates, null, 2)}`;
   }
 
   loadDerivedClientConfig(dest = this) {
-    dest.clientFrameworkAngular = dest.clientFramework === ANGULAR;
+    dest.clientFrameworkAngular = (dest.clientFramework === ANGULAR || dest.clientFramework === ANGULAR_CUSTOM);
     dest.clientFrameworkReact = dest.clientFramework === REACT;
     dest.clientFrameworkVue = dest.clientFramework === VUE;
     dest.clientFrameworkNo = dest.clientFramework === CLIENT_FRAMEWORK_NO;

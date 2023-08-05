@@ -1,0 +1,27 @@
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+import { SharedModule } from 'app/shared/shared.module';
+import { BEHEER_ROUTE } from './beheer.route';
+import { BeheerComponent } from './beheer.component';
+import { HomeComponent } from './home/home.component';
+
+import { NavbarComponent } from 'app/layouts/navbar/navbar.component';
+import { PageRibbonComponent } from 'app/layouts/profiles/page-ribbon.component';
+<%_ if (enableTranslation) { _%>
+import { ActiveMenuDirective } from 'app/layouts/navbar/active-menu.directive';
+<%_ } _%>
+
+@NgModule({
+  imports: [SharedModule, RouterModule.forChild([BEHEER_ROUTE])],
+  declarations: [
+    BeheerComponent, 
+    HomeComponent,
+    NavbarComponent, 
+    PageRibbonComponent, 
+    <%_ if (enableTranslation) { _%>
+        ActiveMenuDirective,
+    <%_ } _%>
+    ],
+})
+export class BeheerModule {}

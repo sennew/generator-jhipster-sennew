@@ -77,11 +77,22 @@ const files = {
         // entities
         'entities/entity-navbar-items.ts',
         'entities/entity-routing.module.ts',
-        // home module
-        'home/home.module.ts',
-        'home/home.route.ts',
-        'home/home.component.ts',
-        'home/home.component.html',
+        // client_beheer module
+        'client_beheer/beheer.module.ts',
+        'client_beheer/beheer.component.html',
+        'client_beheer/beheer.component.scss',
+        'client_beheer/beheer.component.ts',
+        'client_beheer/beheer.route.ts',
+        // client_beheer module - home module
+        'client_beheer/home/home.component.ts',
+        'client_beheer/home/home.component.html',
+        'client_beheer/home/home.component.scss',
+        // client_website module
+        'client_website/website.module.ts',
+        'client_website/website.route.ts',
+        'client_website/website.component.ts',
+        'client_website/website.component.html',
+        'client_website/website.component.scss',
         // layouts
         'layouts/profiles/page-ribbon.component.ts',
         'layouts/profiles/profile.service.ts',
@@ -107,7 +118,7 @@ const files = {
     },
     {
       path: ANGULAR_CUSTOM_DIR,
-      templates: ['layouts/profiles/page-ribbon.component.scss', 'layouts/navbar/navbar.component.scss', 'home/home.component.scss'],
+      templates: ['layouts/profiles/page-ribbon.component.scss', 'layouts/navbar/navbar.component.scss'],
     },
     // login
     {
@@ -422,7 +433,6 @@ const files = {
         'core/util/data-util.service.spec.ts',
         'core/util/parse-links.service.spec.ts',
         'core/util/alert.service.spec.ts',
-        'home/home.component.spec.ts',
         'layouts/main/main.component.spec.ts',
         'layouts/navbar/navbar.component.spec.ts',
         'layouts/profiles/page-ribbon.component.spec.ts',
