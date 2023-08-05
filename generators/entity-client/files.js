@@ -25,7 +25,7 @@ const { cleanupCypressEntityFiles, writeCypressEntityFiles, cypressEntityFiles: 
 
 /* Constants use throughout */
 const { ANGULAR_DIR, REACT_DIR, VUE_DIR } = constants;
-const { ANGULAR, REACT, VUE } = constants.SUPPORTED_CLIENT_FRAMEWORKS;
+const { ANGULAR, ANGULAR_CUSTOM, REACT, VUE } = constants.SUPPORTED_CLIENT_FRAMEWORKS;
 
 const CLIENT_COMMON_TEMPLATES_DIR = 'common';
 const CLIENT_NG2_TEMPLATES_DIR = 'angular';
@@ -89,7 +89,7 @@ function writeFiles() {
       let clientMainSrcDir;
       let templatesDir;
 
-      if (this.clientFramework === ANGULAR) {
+      if (this.clientFramework === ANGULAR || this.clientFramework === ANGULAR_CUSTOM) {
         files = angularFiles;
         clientMainSrcDir = ANGULAR_DIR;
         templatesDir = CLIENT_NG2_TEMPLATES_DIR;

@@ -20,6 +20,7 @@
 const Types = {
   ANGULAR_X: 'angularX',
   ANGULAR: 'angular',
+  ANGULAR_CUSTOM: 'angular_custom',
   REACT: 'react',
   VUE: 'vue',
   SVELTE: 'svelte',

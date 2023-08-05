@@ -36,6 +36,7 @@ const {
 
 const prompts = require('./prompts');
 const { cleanup: cleanupAngular, writeFiles: writeAngularFiles } = require('./files-angular');
+const { cleanup: cleanupAngularCustom, writeFiles: writeAngularCustomFiles } = require('./files-angular_custom');
 const { cleanup: cleanupReact, writeFiles: writeReactFiles } = require('./files-react');
 const { cleanup: cleanupVue, writeFiles: writeVueFiles } = require('./files-vue');
 const writeCommonFiles = require('./files-common').writeFiles;
@@ -47,7 +48,7 @@ const statistics = require('../statistics');
 const { clientDefaultConfig } = require('../generator-defaults');
 const { GENERATOR_CYPRESS, GENERATOR_COMMON, GENERATOR_LANGUAGES, GENERATOR_CLIENT } = require('../generator-list');
 
-const { ANGULAR, REACT, VUE } = constants.SUPPORTED_CLIENT_FRAMEWORKS;
+const { ANGULAR, ANGULAR_CUSTOM, REACT, VUE } = constants.SUPPORTED_CLIENT_FRAMEWORKS;
 const { CYPRESS } = require('../../jdl/jhipster/test-framework-types');
 const { OAUTH2 } = require('../../jdl/jhipster/authentication-types');
 const databaseTypes = require('../../jdl/jhipster/database-types');
@@ -342,12 +343,15 @@ module.exports = class JHipsterClientGenerator extends BaseBlueprintGenerator {
       cleanupReact,
       cleanupVue,
       cleanupAngular,
+      cleanupAngularCustom,
 
       write() {
         if (this.skipClient) return;
         switch (this.clientFramework) {
           case ANGULAR:
             return writeAngularFiles.call(this);
+          case ANGULAR_CUSTOM:
+            return writeAngularCustomFiles.call(this);  
           case REACT:
             return writeReactFiles.call(this);
           case VUE:

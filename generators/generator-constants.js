@@ -19,7 +19,7 @@
 const validationOptions = require('../jdl/jhipster/validations');
 const gradleOptions = require('./gradle/constants.cjs');
 const databaseTypes = require('../jdl/jhipster/database-types');
-const { ANGULAR_X, REACT, VUE } = require('../jdl/jhipster/client-framework-types');
+const { ANGULAR_X, ANGULAR_CUSTOM ,REACT, VUE } = require('../jdl/jhipster/client-framework-types');
 const commonPackageJson = require('./common/templates/package.json');
 
 // Version of Java
@@ -146,6 +146,7 @@ const SUPPORTED_VALIDATION_RULES = Object.keys(validationOptions)
 
 const SUPPORTED_CLIENT_FRAMEWORKS = {
   ANGULAR: ANGULAR_X,
+  ANGULAR_CUSTOM,
   REACT,
   VUE,
 };
@@ -373,6 +374,7 @@ const constants = {
   CLIENT_WEBPACK_DIR: 'webpack/',
   CLIENT_DIST_DIR,
   ANGULAR_DIR: `${MAIN_DIR}webapp/app/`,
+  ANGULAR_CUSTOM_DIR: `${MAIN_DIR}webapp/app/`,
   REACT_DIR: `${MAIN_DIR}webapp/app/`,
   VUE_DIR: `${MAIN_DIR}webapp/app/`,
 

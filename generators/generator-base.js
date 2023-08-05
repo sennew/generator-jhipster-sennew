@@ -43,7 +43,7 @@ const { calculateDbNameWithLimit, hibernateSnakeCase } = require('../utils/db');
 const defaultApplicationOptions = require('../jdl/jhipster/default-application-options');
 const databaseTypes = require('../jdl/jhipster/database-types');
 const { databaseData } = require('./sql-constants');
-const { ANGULAR_X: ANGULAR, REACT, VUE, SVELTE, NO: CLIENT_FRAMEWORK_NO } = require('../jdl/jhipster/client-framework-types');
+const { ANGULAR_X: ANGULAR, ANGULAR_CUSTOM, REACT, VUE, SVELTE, NO: CLIENT_FRAMEWORK_NO } = require('../jdl/jhipster/client-framework-types');
 const {
   PRIORITY_NAMES: {
     LOADING,
@@ -403,7 +403,7 @@ class JHipsterBaseGenerator extends PrivateBase {
    * @param {string} clientFramework - The name of the client framework
    */
   addIcon(iconName, clientFramework) {
-    if (clientFramework === ANGULAR) {
+    if (clientFramework === ANGULAR || clientFramework === ANGULAR_CUSTOM) {
       this.needleApi.clientAngular.addIcon(iconName);
     } else if (clientFramework === REACT) {
       // React
@@ -421,7 +421,7 @@ class JHipsterBaseGenerator extends PrivateBase {
    * @param {string} translationKeyMenu - i18n key for entry in the menu
    */
   addElementToMenu(routerName, iconName, enableTranslation, clientFramework, translationKeyMenu = _.camelCase(routerName)) {
-    if (clientFramework === ANGULAR) {
+    if (clientFramework === ANGULAR || clientFramework === ANGULAR_CUSTOM) {
       this.needleApi.clientAngular.addElementToMenu(routerName, iconName, enableTranslation, translationKeyMenu, this.jhiPrefix);
     } else if (clientFramework === REACT) {
       // React
@@ -449,7 +449,7 @@ class JHipsterBaseGenerator extends PrivateBase {
    * @param {string} translationKeyMenu - i18n key for entry in the admin menu
    */
   addElementToAdminMenu(routerName, iconName, enableTranslation, clientFramework, translationKeyMenu = _.camelCase(routerName)) {
-    if (clientFramework === ANGULAR) {
+    if (clientFramework === ANGULAR || clientFramework === ANGULAR_CUSTOM) {
       this.needleApi.clientAngular.addElementToAdminMenu(routerName, iconName, enableTranslation, translationKeyMenu, this.jhiPrefix);
     } else if (clientFramework === REACT) {
       // React
@@ -473,7 +473,7 @@ class JHipsterBaseGenerator extends PrivateBase {
     entityTranslationKeyMenu = _.camelCase(routerName),
     entityTranslationValue = _.startCase(routerName)
   ) {
-    if (clientFramework === ANGULAR) {
+    if (clientFramework === ANGULAR || clientFramework === ANGULAR_CUSTOM) {
       this.needleApi.clientAngular.addEntityToMenu(
         routerName,
         enableTranslation,
@@ -514,7 +514,7 @@ class JHipsterBaseGenerator extends PrivateBase {
     readOnly = this.readOnly,
     pageTitle = this.enableTranslation ? `${this.i18nKeyPrefix}.home.title` : this.entityClassPlural
   ) {
-    if (clientFramework === ANGULAR) {
+    if (clientFramework === ANGULAR || clientFramework === ANGULAR_CUSTOM) {
       this.needleApi.clientAngular.addEntityToModule(entityName, entityFolderName, entityFileName, entityUrl, microserviceName, pageTitle);
     } else if (clientFramework === REACT) {
       this.needleApi.clientReact.addEntityToModule(entityInstance, entityClass, entityName, entityFolderName, entityFileName);

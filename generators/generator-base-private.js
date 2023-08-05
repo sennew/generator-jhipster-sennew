@@ -37,7 +37,7 @@ const { stringify } = require('../utils');
 const { fieldIsEnum } = require('../utils/field');
 const { databaseData } = require('./sql-constants');
 
-const { ANGULAR, REACT, VUE } = SUPPORTED_CLIENT_FRAMEWORKS;
+const { ANGULAR, ANGULAR_CUSTOM, REACT, VUE } = SUPPORTED_CLIENT_FRAMEWORKS;
 const dbTypes = require('../jdl/jhipster/field-types');
 const { REQUIRED } = require('../jdl/jhipster/validations');
 
@@ -164,7 +164,7 @@ module.exports = class JHipsterBasePrivateGenerator extends Generator {
    * @param languages
    */
   updateLanguagesInLanguageConstantNG2(languages) {
-    if (this.clientFramework !== ANGULAR) {
+    if (this.clientFramework !== ANGULAR || this.clientFramework !== ANGULAR_CUSTOM) {
       return;
     }
     const fullPath = `${this.CLIENT_MAIN_SRC_DIR}app/config/language.constants.ts`;
@@ -237,7 +237,7 @@ module.exports = class JHipsterBasePrivateGenerator extends Generator {
    */
   updateLanguagesInLanguagePipe(languages) {
     const fullPath =
-      this.clientFramework === ANGULAR
+      (this.clientFramework === ANGULAR || this.clientFramework === ANGULAR_CUSTOM)
         ? `${this.CLIENT_MAIN_SRC_DIR}app/shared/language/find-language-from-key.pipe.ts`
         : `${this.CLIENT_MAIN_SRC_DIR}/app/config/translation.ts`;
     try {
@@ -354,7 +354,7 @@ module.exports = class JHipsterBasePrivateGenerator extends Generator {
     let fullPath = `${this.CLIENT_MAIN_SRC_DIR}app/config/dayjs.ts`;
     if (this.clientFramework === VUE) {
       fullPath = `${this.CLIENT_MAIN_SRC_DIR}app/shared/config/dayjs.ts`;
-    } else if (this.clientFramework === ANGULAR) {
+    } else if (this.clientFramework === ANGULAR || this.clientFramework === ANGULAR_CUSTOM) {
       fullPath = `${this.CLIENT_MAIN_SRC_DIR}app/config/dayjs.ts`;
     }
     try {
@@ -983,10 +983,10 @@ module.exports = class JHipsterBasePrivateGenerator extends Generator {
       const importType = `I${otherEntityAngularName}`;
       let importPath;
       if (this.isBuiltInUser(otherEntityAngularName)) {
-        importPath = clientFramework === ANGULAR ? 'app/entities/user/user.model' : 'app/shared/model/user.model';
+        importPath = (clientFramework === ANGULAR || clientFramework === ANGULAR_CUSTOM) ? 'app/entities/user/user.model' : 'app/shared/model/user.model';
       } else {
         importPath =
-          clientFramework === ANGULAR
+          (clientFramework === ANGULAR || clientFramework === ANGULAR_CUSTOM)
             ? `app/entities/${relationship.otherEntityClientRootFolder}${relationship.otherEntityFolderName}/${relationship.otherEntityFileName}.model`
             : `app/shared/model/${relationship.otherEntityClientRootFolder}${relationship.otherEntityFileName}.model`;
       }
@@ -1010,7 +1010,7 @@ module.exports = class JHipsterBasePrivateGenerator extends Generator {
       if (field.fieldIsEnum && (!uniqueEnums[fieldType] || (uniqueEnums[fieldType] && field.fieldValues.length !== 0))) {
         const importType = `${fieldType}`;
         const basePath = clientFramework === VUE ? '@' : 'app';
-        const modelPath = clientFramework === ANGULAR ? 'entities' : 'shared/model';
+        const modelPath = (clientFramework === ANGULAR | clientFramework === ANGULAR_CUSTOM ) ? 'entities' : 'shared/model';
         const importPath = `${basePath}/${modelPath}/enumerations/${enumFileName}.model`;
         uniqueEnums[fieldType] = field.fieldType;
         typeImports.set(importType, importPath);
